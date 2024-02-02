@@ -2,18 +2,30 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import CreateNotes from './components/CreateNotes';
+import ReadNotes from './components/ReadNotes';
+import {Link,Route, BrowserRouter as Router,Routes} from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import EditNotes from './components/EditNotes';
+import DeleteNotes from './components/DeleteNotes';
+import Home from './components/Home';
+
+ 
 
 //connet to json server
 
-function Note({note}) {
-  // console.log(note);
-  return( 
+// function Note({note}) {
+//   // console.log(note);
+//   return( 
   
-      <li>{ note.content } <h6>{ note.important }</h6></li> 
-  )
+//       <li>{ note.content } <h6>{ note.important }</h6></li> 
+//   )
   
-}
-function App(props) {
+// }
+
+function App() {
 
  
   //define a states
@@ -25,7 +37,9 @@ function App(props) {
   const[newnotesimportance,setnewnotesImportance] = useState('');
 //read data filter
   const[showStatus,setShowStatus]=useState('all')
-
+  const padding ={
+    padding:15
+   };
 //get data from backend
 useEffect(()=>{
   // setNotes(props.notes);
@@ -36,7 +50,7 @@ useEffect(()=>{
   .then(responce =>setNotes(responce.data));
   // .then(responce =>console.log(responce.data));
 });
-
+// ,[notes,showStatus]
 //create referencr
 const newNoteRef =useRef(null);
 
@@ -51,8 +65,8 @@ const newNoteRef =useRef(null);
     }
     // send data to json 
     axios
-    .post('http://localhost:3005/notes')
-    .then(responce =>setNotes(responce.data));
+    .post('http://localhost:3005/notes',noteObject)
+    // .then(responce =>setNotes(responce.data));
     // setNotes(notes.concat(noteObject))
     // clear text
     setnewNotesContent("");
@@ -74,113 +88,47 @@ const newNoteRef =useRef(null);
  
     //  console.log(event.target.value);
   }
-  let filterNotes=(notes,status)=>{
-    switch (status) {
-      case 'all':
-       return notes;
-      case 'imp':
-      return notes.filter(note =>note.important===true);
-      case 'nonimp':
-        return notes.filter(note =>note.important===false);
-        case 'on':
-          return notes.filter(note =>note.selectbutton==="on");
-    }
+
     
-      }
-     const notesFilter=filterNotes(notes,showStatus)
   return (
-    <div>
- 
- <h2 style={{backgroundColor: "lightblue"}}>CURD OPERATION</h2>
 
- <h3>Read Notes</h3>
- <h2 >Notes filter Option</h2>
-
-    <label>
-    <input type='radio' name='filter' value="all" 
-    checked={showStatus ==='all'} 
-    onChange={handleStatuChange}/> All notes
-    </label>
-
-    <label>
-          <input type='radio' name='filter' value="imp" 
-    checked={showStatus ==='imp'} 
-    onChange={handleStatuChange}/>Important notes
-    </label>
-
-    <label>
-    <input type='radio' name='filter' value="nonimp" 
-    checked={showStatus ==='nonimp'} 
-    onChange={handleStatuChange}/>Non important notes
-    </label>
-
-    <label>
-    <input type='radio' name='filter' value="on"
-     checked={showStatus ==='on'} 
-     onChange={handleStatuChange}/>current notes in ON
-    </label>
+<Router>
 
 
- <ul>
- {notesFilter.map((note=>
-     
-     <Note key ={note.id} note={note} />
+   
+    <Navbar bg="light" data-bs-theme="dark">
+    {/* <h2 style={{text: "lightblue",textAlign:"center"}}>CURD OPERATION</h2> */}
+        <Container >
+        
+        <Nav className="me-auto">
+    <Link style={padding}to="/">Home </Link>
+    <Link style={padding}to="/read">Read Notes</Link>
+    <Link  style={padding}to="/create">Create Notes</Link>
+    <Link style={padding} to="/edit">Edit Notes</Link>
+    <Link style={padding} to="/delete">Delete Notes</Link>
+    </Nav>
+    </Container>
+      </Navbar>
+    
+    {/* //"react": "^18.2.0",
+    // "react-dom": "^18.2.0",
+    // "react-router": "^6.22.0",
+    // "react-router-dom": "^6.22.0", */}
+<Routes>
+  <Route path='/' element={<Home />}></Route>
+  <Route path='/read' element={<ReadNotes notes={notes} showStatus={showStatus} handleStatuChange={handleStatuChange}/>}></Route>
+  <Route path='/create' element={<CreateNotes addNote={addNote} newnotescontent={newnotescontent} newNoteRef={newNoteRef} handleNoteChange ={handleNoteChange} handleChangeImportant ={handleChangeImportant} newnotesimportance={newnotesimportance}/>}></Route>
+  <Route path='edit' element={<EditNotes/>}></Route>
+  <Route path='delete' element={<DeleteNotes/>}></Route>
 
-     ))}
- {/* {notes.map(note => 
-//  console.log(note.id)
-   <Note key ={note.id} note={note} />
-  )} */}
- </ul>
-
- <h2>Create Notes</h2>
-
-
-<form onSubmit={addNote}>
-
-<label for="fnots">Notes content:  </label>
-  <input type="text" id="fnots" name="fnots"
-   value={newnotescontent}
-    onChange={handleNoteChange}
-    ref={newNoteRef}
-    /><br/><br/>
-
-
-  {/* <label for="fimportant">Notes Important:  </label>
-  <input type="text" id="fimportant" name="fimportant" 
-  value={newnotesimportance}
-   onChange={handleChangeImportant}/>
-   <br/> */}
-   <label for="Onoff"> Select Important : </label>
-   <select id="Onoff" onChange={handleChangeImportant} value={newnotesimportance} >
-    <option>Select</option>
-    <option>True</option>
-    <option>False</option>
-
-   </select><br/><br/>
+  </Routes>
+ {/* <h2>Create Notes</h2> */}
 
 
-  {/* <input type="text" id="fimportant" name="fimportant" value={newnotesimportance} onChange={(e)=>setnewnotesImportance(e.target.value)}/><br/> */}
- 
- 
 
-  <button type='submit'>  Add Notes</button>
-
-</form>
-
-
-{/* <form onSubmit={addNote}>
-<label for="fnots">Notes:</label><br/>
-  <input type="text" id="fnots" name="fnots" value={newnotes} /><br/>
-  <label for="fname">First name:</label><br/>
-  <input type="text" id="fname" name="fname" value="John" /><br/>
-  <label for="lname">Last name:</label><br/>
-  <input type="text" id="lname" name="lname" value="Doe" /><br/><br/>
-  <input type="submit" value="Submit" />
-</form> */}
-
- 
-    </div>
+    
+    
+    </Router>
     )
 };
 
