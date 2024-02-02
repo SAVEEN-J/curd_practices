@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 
 
@@ -15,14 +15,22 @@ function App(props) {
 
  
   //define a states
-  const[notes,setNotes] = useState(props.notes);
+  // const[notes,setNotes] = useState(props.notes);
+  const[notes,setNotes] = useState([]);
   //content
   const[newnotescontent,setnewNotesContent] = useState('');
   //importance
   const[newnotesimportance,setnewnotesImportance] = useState('');
 
+//get data from backend
+useEffect(()=>{
+  setNotes(props.notes);
+});
 
-  
+//create referencr
+const newNoteRef =useRef(null);
+
+  //create
   let addNote =(event)=>{
     event.preventDefault();
 
@@ -36,6 +44,7 @@ function App(props) {
     // clear text
     setnewNotesContent("");
     setnewnotesImportance("");
+    newNoteRef.current.focus(); //its go to first text box
   }
   
   let handleNoteChange=(event)=>{
@@ -65,10 +74,17 @@ function App(props) {
  <h2>Create Notes</h2>
 <form onSubmit={addNote}>
 <label for="fnots">Notes content:  </label>
-  <input type="text" id="fnots" name="fnots" value={newnotescontent} onChange={handleNoteChange}/><br/><br/>
+  <input type="text" id="fnots" name="fnots"
+   value={newnotescontent}
+    onChange={handleNoteChange}
+    ref={newNoteRef}
+    /><br/><br/>
+
 
   <label for="fimportant">Notes Important:  </label>
-  <input type="text" id="fimportant" name="fimportant" value={newnotesimportance} onChange={handleChangeImportant}/><br/>
+  <input type="text" id="fimportant" name="fimportant" 
+  value={newnotesimportance}
+   onChange={handleChangeImportant}/><br/>
   {/* <input type="text" id="fimportant" name="fimportant" value={newnotesimportance} onChange={(e)=>setnewnotesImportance(e.target.value)}/><br/> */}
  
  
