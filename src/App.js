@@ -1,7 +1,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import axios from 'axios';
 
+//connet to json server
 
 function Note({note}) {
   // console.log(note);
@@ -26,8 +28,14 @@ function App(props) {
 
 //get data from backend
 useEffect(()=>{
-  setNotes(props.notes);
-},[]);
+  // setNotes(props.notes);
+  // featch from json server
+//read 
+  axios
+  .get('http://localhost:3005/notes')
+  .then(responce =>setNotes(responce.data));
+  // .then(responce =>console.log(responce.data));
+});
 
 //create referencr
 const newNoteRef =useRef(null);
@@ -39,10 +47,13 @@ const newNoteRef =useRef(null);
     let noteObject ={
       id:notes.length+1,
       content:newnotescontent,
-        importance:newnotesimportance,
+        importance:newnotesimportance==='true',
     }
-
-    setNotes(notes.concat(noteObject))
+    // send data to json 
+    axios
+    .post('http://localhost:3005/notes')
+    .then(responce =>setNotes(responce.data));
+    // setNotes(notes.concat(noteObject))
     // clear text
     setnewNotesContent("");
     setnewnotesImportance("");

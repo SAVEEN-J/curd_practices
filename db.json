@@ -1,0 +1,65 @@
+{
+  "notes": [
+    {
+      "id": "1",
+      "content": "Working with Lists",
+      "important": true
+    },
+    {
+      "id": "2",
+      "content": "Usage of keys",
+      "important": false
+    },
+    {
+      "id": "3",
+      "content": "Conditional Rendering",
+      "important": true
+    },
+    {
+      "id": "4",
+      "content": "Handling Events",
+      "important": true
+    },
+    {
+      "id": "5",
+      "content": "Props Vs State",
+      "important": false,
+      "selectbutton": "on"
+    },
+    {
+      "id": "6",
+      "content": "java",
+      "important": true
+    },
+    {
+      "id": "7",
+      "content": "html",
+      "important": true
+    },
+    {
+      "id": "8",
+      "content": "BACKEND",
+      "important": true
+    },
+    {
+      "id": "9",
+      "content": "mobile",
+      "important": false,
+      "selectbutton": "on"
+    },
+    {
+      "id": "10",
+      "content": "json- server",
+      "important": true
+    },
+    {
+      "id": "3eba"
+    },
+    {
+      "id": "9993"
+    },
+    {
+      "id": "acde"
+    }
+  ]
+}
