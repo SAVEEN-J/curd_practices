@@ -15,7 +15,7 @@ function CreateNotes({addNote,newnotescontent,handleNoteChange,newNoteRef,handle
 
 <form onSubmit={addNote}>
 
-<label for="fnots">Notes content &emsp;&emsp;: &emsp; </label>
+<label htmlFor="fnots">Notes content &emsp;&emsp;: &emsp; </label>
   <input type="text" id="fnots" name="fnots"
    value={newnotescontent}
     onChange={handleNoteChange}
@@ -28,7 +28,7 @@ function CreateNotes({addNote,newnotescontent,handleNoteChange,newNoteRef,handle
   value={newnotesimportance}
    onChange={handleChangeImportant}/>
    <br/> */}
-   <label for="Onoff"> Select Important &#160;&#160;&#160;&#160;: &emsp;</label>
+   <label htmlFor="Onoff"> Select Important &#160;&#160;&#160;&#160;: &emsp;</label>
    <select id="Onoff" onChange={handleChangeImportant} value={newnotesimportance} >
     <option>Select</option>
     <option>True</option>

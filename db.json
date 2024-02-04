@@ -1,61 +1,61 @@
 {
   "notes": [
     {
-      "id": 1,
-      "content": "Working with Lists",
-      "important": true
+      "id": "1",
+      "content": "Working with Lists ana arrays",
+      "important": false
     },
     {
-      "id": 2,
+      "id": "2",
       "content": "Usage of keys",
       "important": false
     },
     {
-      "id": 3,
+      "id": "3",
       "content": "Conditional Rendering",
       "important": true
     },
     {
-      "id": 4,
+      "id": "4",
       "content": "Handling Events",
       "important": true
     },
     {
-      "id": 5,
+      "id": "5",
       "content": "Props Vs State",
       "important": false,
       "selectbutton": "on"
     },
     {
-      "id": 6,
+      "id": "6",
       "content": "java",
       "important": true
     },
     {
-      "id": 7,
+      "id": "7",
       "content": "html",
       "important": true
     },
     {
-      "id": 8,
+      "id": "8",
       "content": "BACKEND",
       "important": true
     },
     {
-      "id": 9,
+      "id": "9",
       "content": "mobile",
       "important": false,
       "selectbutton": "on"
     },
     {
-      "id": 10,
+      "id": "10",
       "content": "json- server",
       "important": true
     },
     {
-      "id": 11,
+      "id": "11",
       "content": "html and css",
-      "importance": false
+      "important": false
     }
   ]
 }

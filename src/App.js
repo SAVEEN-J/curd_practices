@@ -110,11 +110,7 @@ const newNoteRef =useRef(null);
     </Container>
       </Navbar>
     
-    {/* //"react": "^18.2.0",
-    // "react-dom": "^18.2.0",
-    // "react-router": "^6.22.0",
-    // "react-router-dom": "^6.22.0", */}
-<Routes>
+   <Routes>
   <Route path='/' element={<Home />}></Route>
   <Route path='/read' element={<ReadNotes notes={notes} showStatus={showStatus} handleStatuChange={handleStatuChange}/>}></Route>
   <Route path='/create' element={<CreateNotes addNote={addNote} newnotescontent={newnotescontent} newNoteRef={newNoteRef} handleNoteChange ={handleNoteChange} handleChangeImportant ={handleChangeImportant} newnotesimportance={newnotesimportance}/>}></Route>
@@ -123,10 +119,6 @@ const newNoteRef =useRef(null);
 
   </Routes>
  {/* <h2>Create Notes</h2> */}
-
-
-
-    
     
     </Router>
     )

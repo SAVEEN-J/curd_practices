@@ -10,7 +10,12 @@ function DeleteNotes() {
     <Row>
   <Col  md={{ span: 6, offset: 3 }}>
   <h2>Delete Notes</h2>
+
   </Col>
+
+</Row>
+<Row>
+  
 </Row>
 </Container>
    
