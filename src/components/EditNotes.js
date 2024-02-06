@@ -36,7 +36,7 @@ function EditNotes() {
       }
   
   },[selectoptions, options])
-
+//get all data from json server
     const fetchNotes= async() => {
      
       const responce = await axios.get('http://localhost:3005/notes/');
@@ -95,7 +95,7 @@ console.error('Error updating note:',error);
       {selectoptions &&(  
 
    
-    <form onSubmit={handleUpdateSubmit}>
+    <form onSubmit={handleUpdateSubmit}>  
 
 <label htmlFor="fnots">Notes content &emsp;&emsp;: &emsp; </label>
 <input type="text" id="fnots" name="fnots"
