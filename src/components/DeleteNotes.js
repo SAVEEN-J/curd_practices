@@ -38,7 +38,7 @@ function DeleteNotes() {
 
     const fetchNotes= async() => {
      
-      const responce = await axios.get('http://localhost:3005/notes/');
+      const responce = await axios.get('http://localhost:3005/api/notes/');
     //  .then(responce =>setOptions(responce.data));
     setOptions(responce.data);
     }
@@ -52,7 +52,7 @@ function DeleteNotes() {
   const handleUpdateSubmit= async (event) => {
     event.preventDefault();
     try{
-      await axios.delete(`http://localhost:3005/notes/${selectoptions}`,);
+      await axios.delete(`http://localhost:3005/api/notes/${selectoptions}`,);
       setContent('');
       setImportant('Nill');
     fetchNotes();

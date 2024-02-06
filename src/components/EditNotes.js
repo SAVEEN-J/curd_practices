@@ -39,7 +39,7 @@ function EditNotes() {
 //get all data from json server
     const fetchNotes= async() => {
      
-      const responce = await axios.get('http://localhost:3005/notes/');
+      const responce = await axios.get('http://localhost:3005/api/notes/');
     //  .then(responce =>setOptions(responce.data));
     setOptions(responce.data);
     }
@@ -53,7 +53,7 @@ function EditNotes() {
   const handleUpdateSubmit= async (event) => {
     event.preventDefault();
     try{
-      await axios.put(`http://localhost:3005/notes/${selectoptions}`,{
+      await axios.put(`http://localhost:3005/api/notes/${selectoptions}`,{
         ...note,
         content,
         important:important =='true'

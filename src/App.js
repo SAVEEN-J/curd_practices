@@ -46,8 +46,8 @@ useEffect(()=>{
   // featch from json server
 //read 
   axios
-  .get('http://localhost:3005/notes')
-  .then(responce =>setNotes(responce.data));
+  .get('http://localhost:3005/api/notes')
+ .then(responce =>setNotes(responce.data));
   // .then(responce =>console.log(responce.data));
 });
 // ,[notes,showStatus]
@@ -65,7 +65,7 @@ const newNoteRef =useRef(null);
     }
     // send data to json 
     axios
-    .post('http://localhost:3005/notes',noteObject)
+    .post('http://localhost:3005/api/notes',noteObject)
     // .then(responce =>setNotes(responce.data));
     // setNotes(notes.concat(noteObject))
     // clear text
