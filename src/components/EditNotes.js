@@ -3,10 +3,12 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
+import { useParams } from 'react-router';
 
 
 function EditNotes() {
   // const [notes,setNotes]=useState([]);
+  const{id}=useParams();
     const [options,setOptions]=useState([]); //fecthh data from bakend 
     const [selectoptions,setSelectOptions]=useState('');// its stored in selecting id
     const [note,setNote] = useState(null); //we find the selected and compare to backend and store the data

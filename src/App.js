@@ -8,9 +8,10 @@ import {Link,Route, BrowserRouter as Router,Routes} from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import EditNotes from './components/EditNotes';
+// import EditNotes from './components/EditNotes';
 import DeleteNotes from './components/DeleteNotes';
 import Home from './components/Home';
+import { Button, Row } from 'react-bootstrap';
 
  
 
@@ -24,7 +25,93 @@ import Home from './components/Home';
 //   )
   
 // }
+function EditNotes({notes,setNotes}) {
+ console.log("NOTES",notes);
+   const[selectedNote,setSelectedNote] = useState(null);
+   const[formdata,setFormdata] = useState({});
 
+ const handleNoteSelection = (note)=>{
+  setSelectedNote(note);
+  setFormdata(note);
+
+ }
+
+ let handleInputChange=(e)=>{
+  setFormdata({
+    ...formdata,
+    content:e.target.value
+  })
+}
+  let handleSelectChange=(e)=>{
+    setFormdata({
+      ...formdata,
+      important:e.target.value
+    })
+
+ }
+ const editSubmit =async(event)=>{
+  event.preventDefault();
+  try {
+    const responce = await axios .put(`http://localhost:3005/api/notes/${selectedNote._id}`,formdata)
+//featch the data again
+const updateNotes = notes.map(note=>{
+  if(note._id == selectedNote._id){
+    return responce.data;
+  }
+  return note;
+})
+setNotes(updateNotes);
+    
+  } catch (error) {
+    console.error(error);
+  }
+ }
+  return(
+    <Container>
+      <Row>
+      <h2>Edit</h2>
+      </Row>
+      <Row>
+        <ul>
+      {notes.map(value=>
+        <li key={value._id}>
+{value.important ?   <b>{value.content}</b>  :value.content}
+      
+          <Button onClick={()=>handleNoteSelection(value)}>edit</Button>
+
+        <Button>Delete</Button>
+        </li>
+       
+
+      )
+      }
+      {/* {
+        notes.map((value,index,array)=>(
+          <li key={value.id}>{value.content}</li>
+        ))
+      } */}
+      </ul>
+      {selectedNote &&(
+            <form onSubmit={editSubmit}>
+              <input type='text' placeholder='note' value={formdata.content} onChange={handleInputChange}  /> 
+              <select value={formdata.important} onChange={handleSelectChange}>
+                <option>select</option>
+                <option value={true}>true</option>
+                <option value={false}>false</option>
+
+              </select>
+              <Button type='submit'>Update</Button>
+            </form>
+
+      )
+      }
+      </Row>
+  
+    </Container>
+  
+  )
+  
+}
 function App() {
 
  
@@ -49,7 +136,7 @@ useEffect(()=>{
   .get('http://localhost:3005/api/notes')
  .then(responce =>setNotes(responce.data));
   // .then(responce =>console.log(responce.data));
-});
+},[]);
 // ,[notes,showStatus]
 //create referencr
 const newNoteRef =useRef(null);
@@ -114,8 +201,12 @@ const newNoteRef =useRef(null);
   <Route path='/' element={<Home />}></Route>
   <Route path='/read' element={<ReadNotes notes={notes} showStatus={showStatus} handleStatuChange={handleStatuChange}/>}></Route>
   <Route path='/create' element={<CreateNotes addNote={addNote} newnotescontent={newnotescontent} newNoteRef={newNoteRef} handleNoteChange ={handleNoteChange} handleChangeImportant ={handleChangeImportant} newnotesimportance={newnotesimportance}/>}></Route>
-  <Route path='edit' element={<EditNotes/>}></Route>
-  <Route path='delete' element={<DeleteNotes/>}></Route>
+  {/* <Route path='/edit' element={<EditNotes/>}></Route> */}
+  <Route path='/edit' element={<EditNotes notes={notes} setNotes={setNotes} />}></Route>
+
+  <Route path='/delete' element={<DeleteNotes/>}></Route>
+  {/* <Route path='/read/edit/:id' element={<EditNotes/>}></Route> */}
+
 
   </Routes>
  {/* <h2>Create Notes</h2> */}
