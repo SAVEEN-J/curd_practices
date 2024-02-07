@@ -7,42 +7,34 @@ import { useParams } from 'react-router';
 
 
 function EditNotes() {
-  // const [notes,setNotes]=useState([]);
+
   const{id}=useParams();
-    const [options,setOptions]=useState([]); //fecthh data from bakend 
-    const [selectoptions,setSelectOptions]=useState('');// its stored in selecting id
-    const [note,setNote] = useState(null); //we find the selected and compare to backend and store the data
+    const [options,setOptions]=useState([]);
+    const [selectoptions,setSelectOptions]=useState('');
+    const [note,setNote] = useState(null); 
     const [content,setContent] = useState('');
     const [important,setImportant] = useState(false);
 
-
-// console.log(options);
-    //get ALL id from backed
     useEffect(()=>{
       fetchNotes();
-      //   axios
-      //   .get('http://localhost:3005/notes/')
-      //  .then(responce =>setOptions(responce.data));
-    //    console.log(options.id);
-
-    }, []);//[]run ontime only
-
-     //find select id and notes id are same 
+  
+    }, []);
+   
      useEffect(()=>{
       const selectedNotes=options.find((note)=> note.id ==selectoptions)
       if (selectedNotes) {
-        //  console.log(selectedNotes.important);
+      
          setNote(selectedNotes);
          setContent(selectedNotes.content);
          setImportant(selectedNotes.important);
       }
   
   },[selectoptions, options])
-//get all data from json server
+
     const fetchNotes= async() => {
      
       const responce = await axios.get('http://localhost:3005/api/notes/');
-    //  .then(responce =>setOptions(responce.data));
+   
     setOptions(responce.data);
     }
     
@@ -88,8 +80,7 @@ console.error('Error updating note:',error);
               }
                
             </select><br/><br/>
-            {/* <h3> Your Are Selected ID is &#160; : {selectoptions} </h3> 
-           {selectoptions >=1 && <UpdateNotes selectoptions={selectoptions} options={options} />}  */}
+          
         </Col>
 
     </Row>

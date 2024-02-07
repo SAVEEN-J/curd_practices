@@ -22,7 +22,7 @@ function ReadNotes({notes,showStatus,handleStatuChange}) {
         
           }
     const notesFilter=filterNotes(notes,showStatus)
-    // console.log(notesFilter);
+
   return (
     <>
 
@@ -75,13 +75,8 @@ function ReadNotes({notes,showStatus,handleStatuChange}) {
 
         {notesFilter.map((notedata,index,next) =>(
             <Note key={notedata.id} note={notedata} />
-              // console.log(notedata.id);
-              // <li>{ notedata.id } </li> 
-         ))}
- {/* {notes.map(note => 
-//  console.log(note.id)
-   <Note key ={note.id} note={note} />
-  )} */}
+                ))}
+
  </ul>
  </Container>
     </>
