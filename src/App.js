@@ -52,7 +52,7 @@ function EditNotes({notes,setNotes}) {
  const editSubmit =async(event)=>{
   event.preventDefault();
   try {
-    const responce = await axios .put(`http://localhost:3005/api/notes/${selectedNote._id}`,formdata)
+    const responce = await axios .put(`https://day-42-deploy.onrender.com/api/notes/${selectedNote._id}`,formdata)
 //featch the data again
 const updateNotes = notes.map(note=>{
   if(note._id == selectedNote._id){
@@ -133,7 +133,7 @@ useEffect(()=>{
   // featch from json server
 //read 
   axios
-  .get('http://localhost:3005/api/notes')
+  .get('https://day-42-deploy.onrender.com/api/notes')
  .then(responce =>setNotes(responce.data));
   // .then(responce =>console.log(responce.data));
 },[]);
@@ -152,7 +152,7 @@ const newNoteRef =useRef(null);
     }
     // send data to json 
     axios
-    .post('http://localhost:3005/api/notes',noteObject)
+    .post('https://day-42-deploy.onrender.com/api/notes',noteObject)
     // .then(responce =>setNotes(responce.data));
     // setNotes(notes.concat(noteObject))
     // clear text
